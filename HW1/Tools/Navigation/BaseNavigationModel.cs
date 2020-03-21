@@ -22,7 +22,7 @@ namespace CSharpHomework.Tools.Navigation
 
         public void Navigate(ViewType viewType)
         {
-            //if (!_viewsDictionary.ContainsKey(viewType))//todo loooooooooooooooook
+            if (!_viewsDictionary.ContainsKey(viewType))//todo loooooooooooooooook
             {
                 InitializeView(viewType);
                 

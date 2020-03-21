@@ -7,7 +7,6 @@
         xmlns:authentication="clr-namespace:CSharpHomework.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="800">
-    <!--<Grid IsEnabled="{Binding IsControlEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">-->
     <Grid>
 
         <ContentControl Name="_contentControl" Content="{Binding Content, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsControlEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>

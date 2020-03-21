@@ -13,6 +13,9 @@ namespace CSharpHomework.ViewModel
     {
 
         #region Fields
+
+        private static DateViewModel _dateViewModel;
+
         private object m_selectedResult;
         private ObservableCollection<Person> _users;
 
@@ -33,6 +36,13 @@ namespace CSharpHomework.ViewModel
 
 
         #region Properties
+
+        public static DateViewModel DVM
+        {
+            get { return _dateViewModel; }
+            set { _dateViewModel = value; }
+        }
+
         public object SelectedResult
         {
             get { return m_selectedResult; }
@@ -81,6 +91,12 @@ namespace CSharpHomework.ViewModel
             {
                 return _addCommand ?? (_addCommand = new RelayCommand<object>(o =>
                 {
+                    if (DVM != null)
+                    {
+                        DVM.SetFields(null);
+                    }
+                   
+                    
                     NavigationManager.Instance.Navigate(ViewType.AddPerson);
 
                 }));
@@ -147,8 +163,16 @@ namespace CSharpHomework.ViewModel
         {
             StationManager.DataStorage.RemoveUser((Person) result);
             _users.Remove((Person) result);
+            if (DVM != null)
+            {
+                DVM.SetFields((Person) result);
+            }
+            else
+            {
+                DateViewModel.DefPerson = (Person) result;
+            }
 
-            DateViewModel.SetFields((Person) result);
+            //DateViewModel.SetFields((Person) result);
             NavigationManager.Instance.Navigate(ViewType.AddPerson);
 
 
@@ -224,6 +248,10 @@ namespace CSharpHomework.ViewModel
 
         }
 
+        public void AddUser(Person person)
+        {
+            _users.Add(person);
+        }
 
         public MainViewModel()
         {

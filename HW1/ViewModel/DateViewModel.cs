@@ -1,6 +1,5 @@
 ﻿using CSharpHomework.Tools;
 using System;
-using System.Threading.Tasks;
 using System.Windows;
 using CSharpHomework.Model;
 using CSharpHomework.Tools.Managers;
@@ -13,6 +12,9 @@ namespace CSharpHomework.ViewModel
     {
 
         #region Fields
+
+        private static MainViewModel _mainViewModel;
+
         private string _name;
         private string _surname;
         private string _email;
@@ -30,7 +32,15 @@ namespace CSharpHomework.ViewModel
 
         #region Properties
 
+        public static MainViewModel MVM
+        {
+            get { return _mainViewModel; }
+            set
+            {
+                _mainViewModel = value;
 
+            }
+        }
         public string Name
         {
             get { return _name; }
@@ -92,10 +102,13 @@ namespace CSharpHomework.ViewModel
                 return _cancelCommand ?? (_cancelCommand = new RelayCommand<object>(o =>
                 {
 
-                    if(_defPerson!=null)
+                    if (_defPerson != null)
+                    {
                         StationManager.DataStorage.AddUser(_defPerson);
+                        _mainViewModel.AddUser(_defPerson);
+                    }
 
-                    _defPerson = null;
+                    SetFields(null);
 
                     NavigationManager.Instance.Navigate(ViewType.Main);
 
@@ -118,12 +131,14 @@ namespace CSharpHomework.ViewModel
         {
             LoaderManager.Instance.ShowLoader();
 
-            await Task.Run(() => CreatePerson());
+           // await Task.Run(() => CreatePerson());
+            
+            CreatePerson();
 
-            _defPerson = null;
 
             LoaderManager.Instance.HideLoader();
 
+            SetFields(null);
 
             NavigationManager.Instance.Navigate(ViewType.Main);
 
@@ -149,6 +164,8 @@ namespace CSharpHomework.ViewModel
                     MessageBox.Show("Happy B-Day, dear!");
 
                 StationManager.DataStorage.AddUser(person);
+
+                _mainViewModel.AddUser(person);
 
             }
             catch (Exception e)
@@ -181,10 +198,38 @@ namespace CSharpHomework.ViewModel
         }
 
         static private Person _defPerson=null;
-        public static void SetFields(Person person)
+
+        static public Person DefPerson
         {
-            _defPerson=new Person(person.Name,person.Surname,person.Email,person.Birthday);
-            
+            get { return _defPerson; }
+            set { _defPerson = value; }
+        }
+
+        public void SetFields(Person person)
+        {
+
+            if (person != null)
+            {
+                _defPerson = new Person(person.Name, person.Surname, person.Email, person.Birthday);
+
+
+               
+                Name = _defPerson.Name;
+                Surname = _defPerson.Surname;
+                Email = _defPerson.Email;
+                SelectedDate = _defPerson.Birthday;
+
+            }
+            else
+            {
+                _defPerson = null;
+                Name ="";
+                Surname = "";
+                Email = "";
+                SelectedDate = DateTime.Now;
+            }
+
+
         }
 
 

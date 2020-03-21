@@ -11,9 +11,12 @@ namespace CSharpHomework.View
         public MainView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            MainViewModel _mainViewModel=new MainViewModel();
+            DataContext = _mainViewModel;
 
-           
+            DateViewModel.MVM = _mainViewModel;
+
+
         }
 
 

@@ -14,7 +14,9 @@ namespace CSharpHomework.View
         internal Date()
         {
             InitializeComponent();
-            DataContext = new DateViewModel();
+            DateViewModel _dateViewModel=new DateViewModel();
+            DataContext = _dateViewModel;
+            MainViewModel.DVM = _dateViewModel;
 
         }
 

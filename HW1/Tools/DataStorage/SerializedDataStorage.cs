@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using CSharpHomework.Model;
 using CSharpHomework.Tools.Managers;
-using CSharpHomework.Tools.MyExceptions;
-using CSharpHomework.ViewModel;
 
 namespace CSharpHomework.Tools.DataStorage
 {
@@ -33,17 +30,11 @@ namespace CSharpHomework.Tools.DataStorage
                     AddUser(person);
                 }
 
-                //_users=
-                //_users = new ObservableCollection<Person>(StationManager.DataStorage.UsersList);
 
 
             }
         }
 
-        //private string generate(int length)
-        //{
-
-        //}
 
         private Person generatePerson()
         {
