@@ -104,7 +104,7 @@
                 <DataGridTextColumn Header="Person name" Binding="{Binding Name}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday, StringFormat=dd/MM/yyyy}"></DataGridTextColumn>
                 <DataGridTextColumn Header="IsAdult" Binding="{Binding IsAdult}"></DataGridTextColumn>
                 <DataGridTextColumn Header="SunSign" Binding="{Binding SunSign}"></DataGridTextColumn>
                 <DataGridTextColumn Header="ChineseSign" Binding="{Binding ChineseSign}"></DataGridTextColumn>
